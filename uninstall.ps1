@@ -3,7 +3,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Position = 0)]
-    [ValidateSet('Default', 'Flat', 'Mini')]
+    [ValidateSet('Default', 'Flat', 'Mini', 'NestedElevation')]
     [string] $Layout = 'Default',
     [Parameter()]
     [switch] $PreRelease
@@ -45,6 +45,10 @@ if ($layout -eq "Default") {
           Remove-Item "Registry::$key" -Recurse -ErrorAction Ignore | Out-Null
        }
     }
+} elseif ($layout -eq "NestedElevation"){
+    Remove-Item -Path 'Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\shell\MenuTerminalNested' -Recurse -ErrorAction Ignore | Out-Null
+    Remove-Item -Path 'Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\MenuTerminalNested' -Recurse -ErrorAction Ignore | Out-Null
+    Remove-Item -Path 'Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\ContextMenus\MenuTerminalNested\shell' -Recurse -ErrorAction Ignore | Out-Null
 } elseif ($layout -eq "Mini") {
     Remove-Item -Path 'Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\shell\MenuTerminalMini' -Recurse -ErrorAction Ignore | Out-Null
     Remove-Item -Path 'Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\shell\MenuTerminalAdminMini' -Recurse -ErrorAction Ignore | Out-Null
