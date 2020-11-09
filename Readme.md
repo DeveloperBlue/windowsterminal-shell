@@ -40,7 +40,7 @@ Figure 2: Flat layout
 
 Figure 3: Mini layout
 
-|[nestedelevation layout](nestedelevation.png)
+![nestedelevation layout](nestedelevation.png)
 
 Figure 4: Nested Elevation
 
